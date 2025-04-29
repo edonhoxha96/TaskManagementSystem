@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService{
 				.username(dto.getUsername())
 				.email(dto.getEmail())
 				.password(dto.getPassword())
+				.role("MEMBER")
 				.build();
 		user = userRepository.save(user);
 		return toDTO(user);

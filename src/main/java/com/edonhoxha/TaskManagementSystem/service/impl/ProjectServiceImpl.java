@@ -6,9 +6,11 @@ import com.edonhoxha.TaskManagementSystem.entity.User;
 import com.edonhoxha.TaskManagementSystem.repository.ProjectRepository;
 import com.edonhoxha.TaskManagementSystem.repository.UserRepository;
 import com.edonhoxha.TaskManagementSystem.service.ProjectService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
         User creator = userRepository.findById(dto.getCreatedBy())
                 .orElseThrow(() -> new RuntimeException("Creator user not found"));
 
-        Set<User> members = new HashSet<>();
+        List<User> members = new ArrayList<>();
         if(dto.getMemberIds() != null) {
             for(Long memberId : dto.getMemberIds()){
                 User member = userRepository.findById(memberId)
@@ -54,6 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public List<ProjectDTO> getAllProjects() {
         return projectRepository.findAll()
                 .stream()
@@ -70,8 +73,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     private ProjectDTO toDTO(Project project) {
-        List<Long> memberIds = project.getMembers()
-                .stream()
+        Set<User> membersCopy = new HashSet<>(project.getMembers()); // avoid concurrent mod
+        List<Long> memberIds = membersCopy.stream()
                 .map(User::getId)
                 .collect(Collectors.toList());
 

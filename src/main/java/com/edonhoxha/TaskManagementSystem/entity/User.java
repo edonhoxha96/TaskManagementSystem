@@ -1,8 +1,8 @@
 package com.edonhoxha.TaskManagementSystem.entity;
 
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+//import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,7 +41,7 @@ public class User {
     private String role;
 
     @ManyToMany(mappedBy = "members")
-    private Set<Project> projects = new HashSet<>();
+    private List<Project> projects;
 
     @OneToMany(mappedBy = "createdBy")
     private List<Project> createdProjects;
