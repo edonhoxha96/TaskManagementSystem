@@ -1,6 +1,7 @@
 package com.edonhoxha.TaskManagementSystem.service;
 
 import com.edonhoxha.TaskManagementSystem.dto.UserDTO;
+import com.edonhoxha.TaskManagementSystem.entity.Role;
 import com.edonhoxha.TaskManagementSystem.entity.User;
 import com.edonhoxha.TaskManagementSystem.repository.UserRepository;
 import com.edonhoxha.TaskManagementSystem.service.impl.UserServiceImpl;
@@ -32,7 +33,7 @@ class UserServiceTest {
                 .id(1L)
                 .username("john")
                 .email("john@example.com")
-                .role("MEMBER")
+                .role(Role.MEMBER)
                 .password("encodedpass")
                 .build();
 

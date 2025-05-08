@@ -1,5 +1,6 @@
 package com.edonhoxha.TaskManagementSystem.dto;
 
+import com.edonhoxha.TaskManagementSystem.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,8 @@ public class UserRegistrationDTO {
 
     @NotBlank
     private String password;
+
+    @NotBlank
+    private Role role;
 }
 

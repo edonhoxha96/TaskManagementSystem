@@ -4,6 +4,7 @@ import com.edonhoxha.TaskManagementSystem.dto.AuthRequest;
 import com.edonhoxha.TaskManagementSystem.dto.AuthResponse;
 import com.edonhoxha.TaskManagementSystem.dto.UserDTO;
 import com.edonhoxha.TaskManagementSystem.dto.UserRegistrationDTO;
+import com.edonhoxha.TaskManagementSystem.entity.Role;
 import com.edonhoxha.TaskManagementSystem.entity.User;
 import com.edonhoxha.TaskManagementSystem.repository.UserRepository;
 import com.edonhoxha.TaskManagementSystem.security.JwtUtil;
@@ -55,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
                 .username(dto.getUsername())
                 .email(dto.getEmail())
                 .password(passwordEncoder.encode(dto.getPassword()))
-                .role("MEMBER")
+                .role(dto.getRole())
                 .build();
 
         user = userRepository.save(user);
